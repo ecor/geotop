@@ -571,7 +571,7 @@ void find_actual_evaporation_parameters(long  /*R*/, long  /*C*/, double *alpha,
 
       rho = air_density(0.5*(Ta+T(1)), Qa, P);
 
-      //from Ye and Pielke, 1993 - bare soil evaporation
+      //from Ye and Pielke, 1993 - bare soil evaporation: https://journals.ametsoc.org/jamc/article/32/7/1248/14967/Atmospheric-Parameterization-of-Evaporation-from
 
       if (psi > 10.)    //ponding
         {
@@ -645,8 +645,8 @@ void find_actual_evaporation_parameters(long  /*R*/, long  /*C*/, double *alpha,
           *alpha = ( ( theta(1) - soil(jres,1) ) * F + ( soil(jsat,1) - theta(1) ) *
                      A / ( Qgsat * (1. + B ) ) ) / (*beta);
 
-        printf("beta=%f",*beta); // EC 20200901
-        printf("alpha=%f",*alpha); // EC 20200901
+        printf("beta=%f\n",*beta); // EC 20200901
+        printf("alpha=%f\n",*alpha); // EC 20200901
         }
 
     }
