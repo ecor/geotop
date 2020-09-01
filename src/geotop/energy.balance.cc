@@ -2468,7 +2468,7 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
 
         *Hg0=Hg;
         *Eg0=Eg;
-
+        printf(f, "Eg  r=%ld c=%ld \n",r,c); // EC 20200902
         if (Hg!=Hg)
         {
             f = fopen(FailedRunFile, "w");

@@ -106,15 +106,15 @@ void turbulent_fluxes(double rh, double rv, double P, double Ta, double T,
   //*dHdT=cp*rho*pot/rh;
 
   //evaporation [kg/(s*m2)]
-  printf("rho:%f\n",rho); //  EC 20200901
-  printf("Q:%f\n",Q); //  EC 20200901
-  printf("Qa:%f\n",Qa); //  EC 20200901
-  printf("rv:%f\n",rv); //  EC 20200901
+  printf("rho=%f\n",rho); //  EC 20200901
+  printf("Q=%f\n",Q); //  EC 20200901
+  printf("Qa=%f\n",Qa); //  EC 20200901
+  printf("rv=%f\n",rv); //  EC 20200901
   
   *E=rho*(Q-Qa)/rv;
   *dEdT=rho*dQdT/rv;
   
-  printf("E:%f\n",*E); //  EC 20200901
+  printf("E=%f\n",*E); //  EC 20200901
 }
 
 /******************************************************************************************************************************************/
