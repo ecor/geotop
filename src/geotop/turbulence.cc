@@ -645,6 +645,8 @@ void find_actual_evaporation_parameters(long  /*R*/, long  /*C*/, double *alpha,
           *alpha = ( ( theta(1) - soil(jres,1) ) * F + ( soil(jsat,1) - theta(1) ) *
                      A / ( Qgsat * (1. + B ) ) ) / (*beta);
 
+        printf("beta=%f",*beta); // EC 20200901
+        printf("alpha=%f",*alpha); // EC 20200901
         }
 
     }
