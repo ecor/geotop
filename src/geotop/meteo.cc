@@ -217,7 +217,7 @@ double TfromSatVapPressure(double e, double P)
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97;
-  T=c*log(e/A)/(b-log(e/A)) // EC 20200902
+  T=c*log(e/A)/(b-log(e/A)); // EC 20200902
   if (T<(-c+1)) {T=-c+1;} // EC 20200902
   return T;
 }
