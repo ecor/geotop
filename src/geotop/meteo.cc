@@ -193,7 +193,7 @@ double SatVapPressure(double T, double P)
   e=A*exp(b*T/(c+T));
   printf("e=%f\n",P); // EC 20200902
 
-  return q;
+  return e;
 }
 
 //Finds the saturated vapour pressure and its derivative with respect to temperature
