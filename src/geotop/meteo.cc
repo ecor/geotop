@@ -180,7 +180,7 @@ T: air temperature in [C]
 //Saturated vapour pressure
 double SatVapPressure(double T, double P)
 {
-  double A, b, c,q;
+  double A, b, c,e;
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97; 
