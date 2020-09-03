@@ -191,7 +191,7 @@ double SatVapPressure(double T, double P)
   printf("T=%f\n",T); // EC 20200902
   printf("P=%f\n",P); // EC 20200902
   e=A*exp(b*T/(c+T));
-  printf("e=%f\n",P); // EC 20200902
+  printf("e=%f\n",e); // EC 20200902
 
   return e;
 }
