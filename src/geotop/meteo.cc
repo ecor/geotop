@@ -180,7 +180,7 @@ T: air temperature in [C]
 //Saturated vapour pressure
 double SatVapPressure(double T, double P)
 {
-  double A, b, c;
+  double A, b, c,q;
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97; 
@@ -188,9 +188,12 @@ double SatVapPressure(double T, double P)
   // https://en.wikipedia.org/wiki/Clausius%E2%80%93Clapeyron_relation#cite_note-11
   // https://watermark.silverchair.com/bams-86-2-225.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAApEwggKNBgkqhkiG9w0BBwagggJ-MIICegIBADCCAnMGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMfZbADrzR64Sek9raAgEQgIICRGWLRcBBnY2qFIWY3bSyCIUJshRez25alWui0C8DIn_d8Z8-w-F_4_lngTuI5Ak6-438_kHY7RmMBqVE8WPti7tloGd12kyAGa6NjUPAtuIyB_qHrljYMPLciUN9Y9QpaETsxEm6mneoY8uZZhaBjJlM2BISbaw0AkTe7Kgz1hyIEpdz6DL0IideUGgjLdG_baefNK_PYp2SHXpE4IkqrgmEqP1Zc5W_1lw4Gu0cXfboS7WG7Tv1pPnLQZ72Ni6unT4Z8p5OTtoiBHDdPVxcdCDR5B0FnqkesgRCyuqARlLYn8975W2DV3Yt0gZAICX0QUGy9a8iT_o7ONXbettJytGoQD5f0UiAeZK-p0Lc829rbjXuRNRUuXT-pJ0i_u4D1MGDpjYR1w28irA2qfLuj6WVxH2H7nRtIPM0OOwkGIk2F3xdqhCo2mGo6JQym_piFUk-0fHVccS0h4_TVafAXIupX6Sf8FFPXPoOuo6ufRpTdQvRlu1g4-nnnbQcd5_iMo7t000Xt725YcbRB-_dfeR-hQlVueK-uPjYiz8GNFJsY2ufB2yUMckpOtmUXoO2gvJGIHoeMk7M08gdxa6036Wcfzil2RpJStIk4Z9yuV_nKP9QusMIiQoiiPdoMCwlVeHDhte-p60XvFHIZDnENJg_L90Jm5mR8IInEljr4WsqPp7SCoNQqrW-V5JT-JbivM3--QJZ1hdgh8P13ZEHXyHqFRSmmBiyBA57hrRjtvG6YJf7NO-gWGrzdeJrDKkObAbIBXo
   // https://meteo-wagenborgen.nl/wp/2019/09/26/corrections-to-the-august-roche-magnus-equation-in-pwsfwi/
-  printf("T=%f\n",T); //EC 20200902
-  printf("P=%f\n",P); //EC 20200902
-  return A*exp(b*T/(c+T));
+  printf("T=%f\n",T); // EC 20200902
+  printf("P=%f\n",P); // EC 20200902
+  e=A*exp(b*T/(c+T));
+  printf("e=%f\n",P); // EC 20200902
+
+  return q;
 }
 
 //Finds the saturated vapour pressure and its derivative with respect to temperature
@@ -216,9 +219,12 @@ double TfromSatVapPressure(double e, double P)
 
 double SpecHumidity(double e, double P)
 {
-  printf("e=%f\n",e); //EC 20200902
-  printf("P=%f\n",P); //EC 20200902
-  return 0.622*e/(P-0.378*e);
+  double q;
+  printf("e=%f\n",e); // EC 20200902
+  printf("P=%f\n",P); // EC 20200902
+  q=0.622*e/(P-0.378*e);
+  printf("q=%f\n",q); // EC 20200902
+  return q;
 }
 
 void SpecHumidity_2(double *Q, double *dQ_dT, double RH, double T, double P)
