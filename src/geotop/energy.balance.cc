@@ -1832,6 +1832,10 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
             }
 
             Tg=(*egy->Temp)(sur);
+            printf("Tg=%f\n",Tg); // EC 20200905
+            printf("Tmin_surface_below_which_surfenergy_balance_recalculated=%f\n",Tmin_surface_below_which_surfenergy_balance_recalculated); // EC 20200905
+            printf("flagTmin=%d\n",flagTmin); // EC 20200905
+            
             if (Tg < Tmin_surface_below_which_surfenergy_balance_recalculated) flagTmin++;
 
             if (surfacebalance == 1)
@@ -2449,6 +2453,9 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
     //bare soil
     if (fc<1)
     {
+
+        printf("Ta=%f\n",Ta); // EC 20200902
+        printf("Tg=%f\n",Tg); // EC 20200902
         aero_resistance(zmu, zmT, z0s, d0s, rz0s, v, Ta, Tg, Qa, *Qg, P, LR, Lobukhov,
                         &rm, rh_g, rv_g, par->state_turb, par->monin_obukhov, par->maxiter_Businger);
 

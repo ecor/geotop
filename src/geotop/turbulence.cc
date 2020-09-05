@@ -60,7 +60,7 @@ void aero_resistance(double zmu, double zmt, double z0, double d0,
   else if (state_turb==1)
     {
       Businger(MO, zmu, zmt, d0, z0, v, 0.5*T+0.5*Ta, T-Ta, Q-Qa, z0_z0t, rm, rh,
-               rv, Lobukhov, maxiter);
+               rv, Lobukhov, maxiter); // EC only state_turb=1?? EC 20200905
 
     }
   else if (state_turb==2)   //catabatic flows - OERLEMANS & GRISOGONO (2002)
@@ -283,7 +283,8 @@ double cz(double zmeas, double z0, double d0, double L,
   double c,zeta;
 
   zeta=(zmeas-d0)/L;
-
+  printf("zmeas=%f  d0=%f zmeas=%f\n",zmeas); //EC 20200906
+ 
   if (zeta<0)
     {
       c=log((zmeas-d0)/z0) - (*unstab)(zeta) + (*unstab)(z0/L);
