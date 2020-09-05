@@ -1832,6 +1832,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
             }
 
             Tg=(*egy->Temp)(sur);
+            
             printf("Tg=%f\n",Tg); // EC 20200905
             printf("Tmin_surface_below_which_surfenergy_balance_recalculated=%f\n",Tmin_surface_below_which_surfenergy_balance_recalculated); // EC 20200905
             printf("flagTmin=%d\n",flagTmin); // EC 20200905
