@@ -269,7 +269,12 @@ double RHfromTdew(double T, double Tdew, double Z)
 double air_density(double T, double Q, double P)    //[kg/m3]
 {
   double rho;
+  printf("air_density_01: T=%f\n",T); // EC 20200907
+  if (T<(-273.15+1)) {T=-273.15+1;} // EC 20200907
+  printf("air_density_02: T=%f\n",T); // EC 20200907
   rho=P*100/(287.04*(T+273.15))*(1- (Q * P/(0.622+0.368*Q) ) / P*(1-0.622) );
+  printf("air_density_03: rho=%f\n",rho); // EC 20200907
+
   return (rho);
 }
 
@@ -277,6 +282,10 @@ double air_cp(double
               T)   //air specific heat at constant pressure [J/(kg K)] (Garrat,1992)
 {
   double cp;
+
+  printf("air_cp_01: T=%f\n",T); // EC 20200907
+  if (T<(-273.15+1)) {T=-273.15+1;} // EC 20200907
+  printf("air_cp_02: T=%f\n",T); // EC 20200907
   cp=1005.00+(T+23.15)*(T+23.15)/3364.0;
   return (cp);
 }
