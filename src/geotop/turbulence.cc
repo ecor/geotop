@@ -106,15 +106,15 @@ void turbulent_fluxes(double rh, double rv, double P, double Ta, double T,
   //*dHdT=cp*rho*pot/rh;
 
   //evaporation [kg/(s*m2)]
-  printf("rho=%f\n",rho); //  EC 20200901
-  printf("Q=%f\n",Q); //  EC 20200901
-  printf("Qa=%f\n",Qa); //  EC 20200901
-  printf("rv=%f\n",rv); //  EC 20200901
+  //printf("rho=%f\n",rho); //  EC 20200901
+  //printf("Q=%f\n",Q); //  EC 20200901
+  //printf("Qa=%f\n",Qa); //  EC 20200901
+  //printf("rv=%f\n",rv); //  EC 20200901
   
   *E=rho*(Q-Qa)/rv;
   *dEdT=rho*dQdT/rv;
   
-  printf("E=%f\n",*E); //  EC 20200901
+  //printf("E=%f\n",*E); //  EC 20200901
 }
 
 /******************************************************************************************************************************************/
@@ -652,8 +652,8 @@ void find_actual_evaporation_parameters(long  /*R*/, long  /*C*/, double *alpha,
           *alpha = ( ( theta(1) - soil(jres,1) ) * F + ( soil(jsat,1) - theta(1) ) *
                      A / ( Qgsat * (1. + B ) ) ) / (*beta);
 
-        printf("beta=%f\n",*beta); // EC 20200901
-        printf("alpha=%f\n",*alpha); // EC 20200901
+        //printf("beta=%f\n",*beta); // EC 20200901
+        //printf("alpha=%f\n",*alpha); // EC 20200901
         }
 
     }

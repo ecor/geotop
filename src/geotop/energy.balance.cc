@@ -384,7 +384,9 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     ea = RHpoint * SatVapPressure(Tpoint, Ppoint);//Vapour Pressure [mbar]
     Qa = SpecHumidity(ea, Ppoint);//Specific Humidity
     Tdew = TfromSatVapPressure(ea, Ppoint);//Dew Temperature
-
+    printf("PointEnargyBalance Tdew=%f\n",Tdew); // EC 20200910
+    printf("PointEnargyBalance Precpoint=%f\n",Precpoint); // EC 20200910
+    
     //distinguish between rain and snow
     if (A->P->dew==1)
     {
@@ -398,7 +400,9 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
         part_snow(Precpoint, &Prain_over, &Psnow_over, Tpoint, A->P->T_rain,
                   A->P->T_snow);
     }
-
+    printf("PointEnargyBalance Prain_over=%f\n",Prain_over); // EC 20200910
+    printf("PointEnargyBalance Psnow_over=%f\n",Psnow_over); // EC 20200910
+    
     //Adjusting snow precipitation in case of steep slope (contribution by Stephan Gruber)
     if (A->P->snow_curv > 0 && (*A->T->slope)(r,c) > A->P->snow_smin)
     {
@@ -2454,7 +2458,7 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
     //bare soil
     if (fc<1)
     {
-
+        printf("start if ...") // EC 20200902
         printf("Ta=%f\n",Ta); // EC 20200902
         printf("Tg=%f\n",Tg); // EC 20200902
         aero_resistance(zmu, zmT, z0s, d0s, rz0s, v, Ta, Tg, Qa, *Qg, P, LR, Lobukhov,
