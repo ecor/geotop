@@ -190,10 +190,10 @@ double SatVapPressure(double T, double P)
   // https://meteo-wagenborgen.nl/wp/2019/09/26/corrections-to-the-august-roche-magnus-equation-in-pwsfwi/
   if (T<(-c+1)) {T=-c+1;} // EC 20200902
 
-  printf("T=%f\n",T); // EC 20200902
-  printf("P=%f\n",P); // EC 20200902
+  //printf("SatVapPressure T=%f\n",T); // EC 20200902
+  //printf("SatVapPressure P=%f\n",P); // EC 20200902
   e=A*exp(b*T/(c+T));
-  printf("e=%f\n",e); // EC 20200902
+  //printf("SatVapPressure e=%f\n",e); // EC 20200902
 
   return e;
 }
@@ -214,21 +214,26 @@ void SatVapPressure_2(double *e, double *de_dT, double T, double P)
 double TfromSatVapPressure(double e, double P)
 {
   double A, b, c,T;
+  printf("TfromSatVapPressure e=%f\n",e); // EC 20200911
+  printf("TfromSatVapPressure P=%f\n",P); // EC 20200911
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97;
+
   T=c*log(e/A)/(b-log(e/A)); // EC 20200902
+  printf("TfromSatVapPressure T=%f\n",T); // EC 20200911
   if (T<(-c+1)) {T=-c+1;} // EC 20200902
+  printf("TfromSatVapPressure after if control T=%f\n",T); // EC 20200911
   return T;
 }
 
 double SpecHumidity(double e, double P)
 {
   double q;
-  printf("e=%f\n",e); // EC 20200902
-  printf("P=%f\n",P); // EC 20200902
+  printf("SpecHumidity e=%f\n",e); // EC 20200902
+  printf("SpecHumidity P=%f\n",P); // EC 20200902
   q=0.622*e/(P-0.378*e);
-  printf("q=%f\n",q); // EC 20200902
+  printf("SpecHumidity q=%f\n",q); // EC 20200902
   return q;
 }
 
@@ -269,11 +274,11 @@ double RHfromTdew(double T, double Tdew, double Z)
 double air_density(double T, double Q, double P)    //[kg/m3]
 {
   double rho;
-  printf("air_density_01: T=%f\n",T); // EC 20200907
+  //printf("air_density_01: T=%f\n",T); // EC 20200907
   if (T<(-273.15+1)) {T=-273.15+1;} // EC 20200907
-  printf("air_density_02: T=%f\n",T); // EC 20200907
+  //printf("air_density_02: T=%f\n",T); // EC 20200907
   rho=P*100/(287.04*(T+273.15))*(1- (Q * P/(0.622+0.368*Q) ) / P*(1-0.622) );
-  printf("air_density_03: rho=%f\n",rho); // EC 20200907
+  //printf("air_density_03: rho=%f\n",rho); // EC 20200907
 
   return (rho);
 }
@@ -283,9 +288,9 @@ double air_cp(double
 {
   double cp;
 
-  printf("air_cp_01: T=%f\n",T); // EC 20200907
+  //printf("air_cp_01: T=%f\n",T); // EC 20200907
   if (T<(-273.15+1)) {T=-273.15+1;} // EC 20200907
-  printf("air_cp_02: T=%f\n",T); // EC 20200907
+  //printf("air_cp_02: T=%f\n",T); // EC 20200907
   cp=1005.00+(T+23.15)*(T+23.15)/3364.0;
   return (cp);
 }

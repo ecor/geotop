@@ -384,18 +384,22 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     ea = RHpoint * SatVapPressure(Tpoint, Ppoint);//Vapour Pressure [mbar]
     Qa = SpecHumidity(ea, Ppoint);//Specific Humidity
     Tdew = TfromSatVapPressure(ea, Ppoint);//Dew Temperature
+    printf("PointEnargyBalance Qa=%f\n",Qa); // EC 20200910
     printf("PointEnargyBalance Tdew=%f\n",Tdew); // EC 20200910
+    printf("PointEnargyBalance Tpoint=%f\n",Tpoint); // EC 20200910
     printf("PointEnargyBalance Precpoint=%f\n",Precpoint); // EC 20200910
     
     //distinguish between rain and snow
     if (A->P->dew==1)
     {
+        printf("Tdew_based");// EC 20200910
         //on the base of the dew temperature of the air
         part_snow(Precpoint, &Prain_over, &Psnow_over, Tdew, A->P->T_rain,
                   A->P->T_snow);
     }
     else
     {
+        printf("Tair_based");// EC 20200910
         //on the base of the temperature of the air
         part_snow(Precpoint, &Prain_over, &Psnow_over, Tpoint, A->P->T_rain,
                   A->P->T_snow);
@@ -2459,8 +2463,8 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
     if (fc<1)
     {
         printf("EnergyFluxes ..."); // EC 20200902
-        printf("Ta=%f\n",Ta); // EC 20200902
-        printf("Tg=%f\n",Tg); // EC 20200902
+        printf("EnergyFluxes Ta=%f\n",Ta); // EC 20200902
+        printf("EnergyFluxes Tg=%f\n",Tg); // EC 20200902
         aero_resistance(zmu, zmT, z0s, d0s, rz0s, v, Ta, Tg, Qa, *Qg, P, LR, Lobukhov,
                         &rm, rh_g, rv_g, par->state_turb, par->monin_obukhov, par->maxiter_Businger);
 
