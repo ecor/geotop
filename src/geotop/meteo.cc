@@ -221,7 +221,7 @@ double TfromSatVapPressure(double e, double P)
   c=240.97;
   // mettere controllo su e EC 20200912
   emin=A*exp(b*(1-c)); 
-  if (e<emin) { e=emin};
+  if (e<emin) { e=emin; }
   printf("TfromSatVapPressure e=%f after if control\n",e); // EC 20200912
   printf("TfromSatVapPressure emin=%f after if control\n",emin); // EC 20200912
   T=c*log(e/A)/(b-log(e/A)); // EC 20200902
