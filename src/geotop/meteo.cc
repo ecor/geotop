@@ -213,13 +213,17 @@ void SatVapPressure_2(double *e, double *de_dT, double T, double P)
 //Temperature from saturated water vapour
 double TfromSatVapPressure(double e, double P)
 {
-  double A, b, c,T;
+  double A, b, c,T,emin;
   printf("TfromSatVapPressure e=%f\n",e); // EC 20200911
   printf("TfromSatVapPressure P=%f\n",P); // EC 20200911
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97;
-
+  // mettere controllo su e EC 20200912
+  emin=A*exp(b*(1-c)); 
+  if (e<emin) { e=emin};
+  printf("TfromSatVapPressure e=%f after if control\n",e); // EC 20200912
+  printf("TfromSatVapPressure emin=%f after if control\n",emin); // EC 20200912
   T=c*log(e/A)/(b-log(e/A)); // EC 20200902
   printf("TfromSatVapPressure T=%f\n",T); // EC 20200911
   if (T<(-c+1)) {T=-c+1;} // EC 20200902
