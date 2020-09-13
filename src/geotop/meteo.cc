@@ -180,15 +180,16 @@ T: air temperature in [C]
 //Saturated vapour pressure
 double SatVapPressure(double T, double P)
 {
-  double A, b, c,e;
+  double A, b, c,e,Tmin;
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97; 
+  Tmin=-110;
   // EC 20200902 why may specific humidity became negative?  // CHECK TEMPERATURE RANGE VALIDITY! https://en.wikipedia.org/wiki/Vapour_pressure_of_water
   // https://en.wikipedia.org/wiki/Clausius%E2%80%93Clapeyron_relation#cite_note-11
   // https://watermark.silverchair.com/bams-86-2-225.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAApEwggKNBgkqhkiG9w0BBwagggJ-MIICegIBADCCAnMGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMfZbADrzR64Sek9raAgEQgIICRGWLRcBBnY2qFIWY3bSyCIUJshRez25alWui0C8DIn_d8Z8-w-F_4_lngTuI5Ak6-438_kHY7RmMBqVE8WPti7tloGd12kyAGa6NjUPAtuIyB_qHrljYMPLciUN9Y9QpaETsxEm6mneoY8uZZhaBjJlM2BISbaw0AkTe7Kgz1hyIEpdz6DL0IideUGgjLdG_baefNK_PYp2SHXpE4IkqrgmEqP1Zc5W_1lw4Gu0cXfboS7WG7Tv1pPnLQZ72Ni6unT4Z8p5OTtoiBHDdPVxcdCDR5B0FnqkesgRCyuqARlLYn8975W2DV3Yt0gZAICX0QUGy9a8iT_o7ONXbettJytGoQD5f0UiAeZK-p0Lc829rbjXuRNRUuXT-pJ0i_u4D1MGDpjYR1w28irA2qfLuj6WVxH2H7nRtIPM0OOwkGIk2F3xdqhCo2mGo6JQym_piFUk-0fHVccS0h4_TVafAXIupX6Sf8FFPXPoOuo6ufRpTdQvRlu1g4-nnnbQcd5_iMo7t000Xt725YcbRB-_dfeR-hQlVueK-uPjYiz8GNFJsY2ufB2yUMckpOtmUXoO2gvJGIHoeMk7M08gdxa6036Wcfzil2RpJStIk4Z9yuV_nKP9QusMIiQoiiPdoMCwlVeHDhte-p60XvFHIZDnENJg_L90Jm5mR8IInEljr4WsqPp7SCoNQqrW-V5JT-JbivM3--QJZ1hdgh8P13ZEHXyHqFRSmmBiyBA57hrRjtvG6YJf7NO-gWGrzdeJrDKkObAbIBXo
   // https://meteo-wagenborgen.nl/wp/2019/09/26/corrections-to-the-august-roche-magnus-equation-in-pwsfwi/
-  if (T<(-c+1)) {T=-c+1;} // EC 20200902
+  if (T<(Tmin)) {T=Tmin;} // EC 20200902
 
   //printf("SatVapPressure T=%f\n",T); // EC 20200902
   //printf("SatVapPressure P=%f\n",P); // EC 20200902
@@ -201,11 +202,12 @@ double SatVapPressure(double T, double P)
 //Finds the saturated vapour pressure and its derivative with respect to temperature
 void SatVapPressure_2(double *e, double *de_dT, double T, double P)
 {
-  double A, b, c;
+  double A, b, c,Tmin;
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97;
-  if (T<(-c+1)) {T=-c+1;} // EC 20200902
+  Tmin=-110;
+  if (T<(Tmin)) {T=Tmin;} // EC 20200902
   *e=A*exp(b*T/(c+T));
   *de_dT=(*e)*(b/(c+T)-b*T/pow_2(c+T));
 }
@@ -213,20 +215,22 @@ void SatVapPressure_2(double *e, double *de_dT, double T, double P)
 //Temperature from saturated water vapour
 double TfromSatVapPressure(double e, double P)
 {
-  double A, b, c,T,emin;
+  double A, b, c,T,emin,Tmin;
   printf("TfromSatVapPressure e=%f\n",e); // EC 20200911
   printf("TfromSatVapPressure P=%f\n",P); // EC 20200911
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97;
   // mettere controllo su e EC 20200912
-  emin=A*exp(b*(1-c)); 
+  // emin=A*exp(b*(1-c)); 
+  Tmin=-110;
+  emin=A*exp(b*Tmin/(c+Tmin));
   if (e<emin) { e=emin; }
   printf("TfromSatVapPressure e=%f after if control\n",e); // EC 20200912
   printf("TfromSatVapPressure emin=%f after if control\n",emin); // EC 20200912
   T=c*log(e/A)/(b-log(e/A)); // EC 20200902
   printf("TfromSatVapPressure T=%f\n",T); // EC 20200911
-  if (T<(-c+1)) {T=-c+1;} // EC 20200902
+  if (T<(Tmin)) {T=Tmin;} // EC 20200902
   printf("TfromSatVapPressure after if control T=%f\n",T); // EC 20200911
   return T;
 }
