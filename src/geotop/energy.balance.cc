@@ -296,6 +296,7 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     RHpoint=(*A->M->RHgrid)(r,c);
     Vpoint=(*A->M->Vgrid)(r,c);
 
+
     Precpoint=(*A->W->PrecTot)(r,c);
     //define prec as normal (not vertical)
     Precpoint*=cos((*A->T->slope)(r,c)*GTConst::Pi/180.);
@@ -384,11 +385,14 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     ea = RHpoint * SatVapPressure(Tpoint, Ppoint);//Vapour Pressure [mbar]
     Qa = SpecHumidity(ea, Ppoint);//Specific Humidity
     Tdew = TfromSatVapPressure(ea, Ppoint);//Dew Temperature
-    printf("PointEnargyBalance Qa=%f\n",Qa); // EC 20200910
-    printf("PointEnargyBalance Tdew=%f\n",Tdew); // EC 20200910
-    printf("PointEnargyBalance Tpoint=%f\n",Tpoint); // EC 20200910
-    printf("PointEnargyBalance Precpoint=%f\n",Precpoint); // EC 20200910
-    
+    printf("PointEnargyBalance r=%d c=%d Qa=%f\n",r,c,Qa); // EC 20200910
+    printf("PointEnargyBalance r=%d c=%d Tdew=%f\n",r,c,Tdew); // EC 20200910
+    printf("PointEnargyBalance r=%d c=%d Tpoint=%f\n",r,c,Tpoint); // EC 20200910
+    printf("PointEnargyBalance r=%d c=%d Precpoint=%f\n",r,c,Precpoint); // EC 20200910
+    printf("PointEnargyBalance r=%d c=%d Ppoint=%f\n",r,c,Ppoint); // EC 20200910
+    printf("PointEnargyBalance r=%d c=%d RHpoint=%f\n",r,c,RHpoint); // EC 20200910
+    printf("PointEnargyBalance r=%d c=%d Vpoint=%f\n",r,c,Vpoint); // EC 20200910
+
     //distinguish between rain and snow
     if (A->P->dew==1)
     {
@@ -1735,11 +1739,12 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
         // for (auto i = path.begin(); i != path.end(); ++i) ref: 
         // cout << "Disparity at points: " << disparityVector << endl;
         // ref: https://stackoverflow.com/questions/10750057/how-to-print-out-the-contents-of-a-vector
+    
         printf("UDEN:\n");
-        for (auto i1 = egy->udFenergy.get().begin(); i1 != egy->udFenergy.get().end(); ++i1)
+        for (std::vector<char>::const_iterator i1 = egy->udFenergy.get().begin(); i1 != egy->udFenergy.get().end(); ++i1)
            std::cout << *i1 << ' ';
         printf("DEN:\n");
-        for (auto i2 = egy->udFenergy.get().begin(); i2 != egy->udFenergy.get().end(); ++i2)
+        for (std::vector<char>::const_iterator i2 = egy->udFenergy.get().begin(); i2 != egy->udFenergy.get().end(); ++i2)
            std::cout << *i2 << ' ';
         //END EC 20200914
         sux = tridiag2(1, r, c, sur, n, egy->udFenergy.get(), egy->dFenergy.get(), egy->udFenergy.get(),
