@@ -216,8 +216,8 @@ void SatVapPressure_2(double *e, double *de_dT, double T, double P)
 double TfromSatVapPressure(double e, double P)
 {
   double A, b, c,T,emin,Tmin;
-  printf("TfromSatVapPressure e=%f\n",e); // EC 20200911
-  printf("TfromSatVapPressure P=%f\n",P); // EC 20200911
+  //printf("TfromSatVapPressure e=%f\n",e); // EC 20200911
+  //printf("TfromSatVapPressure P=%f\n",P); // EC 20200911
   A=6.1121*(1.0007+3.46E-6*P);
   b=17.502;
   c=240.97;
@@ -226,12 +226,12 @@ double TfromSatVapPressure(double e, double P)
   Tmin=-110;
   emin=A*exp(b*Tmin/(c+Tmin));
   if (e<emin) { e=emin; }
-  printf("TfromSatVapPressure e=%f after if control\n",e); // EC 20200912
-  printf("TfromSatVapPressure emin=%f after if control\n",emin); // EC 20200912
+  //printf("TfromSatVapPressure e=%f after if control\n",e); // EC 20200912
+  //printf("TfromSatVapPressure emin=%f after if control\n",emin); // EC 20200912
   T=c*log(e/A)/(b-log(e/A)); // EC 20200902
-  printf("TfromSatVapPressure T=%f\n",T); // EC 20200911
+  //printf("TfromSatVapPressure T=%f\n",T); // EC 20200911
   if (T<(Tmin)) {T=Tmin;} // EC 20200902
-  printf("TfromSatVapPressure after if control T=%f\n",T); // EC 20200911
+  //printf("TfromSatVapPressure after if control T=%f\n",T); // EC 20200911
   return T;
 }
 
