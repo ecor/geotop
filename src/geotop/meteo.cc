@@ -238,10 +238,10 @@ double TfromSatVapPressure(double e, double P)
 double SpecHumidity(double e, double P)
 {
   double q;
-  printf("SpecHumidity e=%f\n",e); // EC 20200902
-  printf("SpecHumidity P=%f\n",P); // EC 20200902
+  //printf("SpecHumidity e=%f\n",e); // EC 20200902
+  //printf("SpecHumidity P=%f\n",P); // EC 20200902
   q=0.622*e/(P-0.378*e);
-  printf("SpecHumidity q=%f\n",q); // EC 20200902
+  //printf("SpecHumidity q=%f\n",q); // EC 20200902
   return q;
 }
 

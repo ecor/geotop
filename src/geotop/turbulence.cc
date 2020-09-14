@@ -283,7 +283,7 @@ double cz(double zmeas, double z0, double d0, double L,
   double c,zeta;
 
   zeta=(zmeas-d0)/L;
-  printf("zmeas=%f  d0=%f zeta=%f L=%f\n",zmeas,d0,zeta,L); //EC 20200906
+  //printf("zmeas=%f  d0=%f zeta=%f L=%f\n",zmeas,d0,zeta,L); //EC 20200906
  
   if (zeta<0)
     {

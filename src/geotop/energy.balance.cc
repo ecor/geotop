@@ -1489,6 +1489,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
          Qs : specific humidity of canopy air*/
 
         //surface energy balance
+        printf("SolvePointEnergyBalance line 1505 Tg=%f\n",Tg); // EC 20200914
         EnergyFluxes(t, Tg, r, c, ns+ng, Tg0, Qg0, Tv0, zmu, zmT, z0s, d0s, rz0s, z0v,
                      d0v, rz0v, hveg, v, Ta, Qa, P, LR, psi0, eps, fc, LSAI,
                      decaycoeff0, *Wcrn, Wcrnmax, *Wcsn, Wcsnmax, &dWcrn, &dWcsn, *egy->THETA,
@@ -1500,6 +1501,10 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
                      *egy->Temp, egy->soil_evap_layer_bare.get(), egy->soil_evap_layer_veg.get(),
                      (*top->sky)(r,c));
 
+        // DEBUG HERE
+        //  
+        printf("SolvePointEnergyBalance line 1505 Tg=%f\n",Tg); // EC 20200914
+        //
         if (micro == 1)
         {
             EB = *LW - (*H) - latent(Tg,Levap(Tg))*(*E) + Eadd + (*egy->SWlayer)(0);
@@ -1840,8 +1845,8 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
             }
 
             Tg=(*egy->Temp)(sur);
-            printf("SolvePointEnergyBalance sur=%f\n",sur); // EC 20200905
-            printf("SolvePointEnergyBalance sur=%f\n",Tg); // EC 20200905
+            printf("SolvePointEnergyBalance sur=%d\n",sur); // EC 20200905
+            printf("SolvePointEnergyBalance Tg=%f\n",Tg); // EC 20200905
             printf("SolvePointEnergyBalanceTmin_surface_below_which_surfenergy_balance_recalculated=%f\n",Tmin_surface_below_which_surfenergy_balance_recalculated); // EC 20200905
             printf("flagTmin=%d\n",flagTmin); // EC 20200905
             
