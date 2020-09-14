@@ -1456,7 +1456,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
         }
 
     }
-
+    printf("SolvePointEnergyBalance line 1459 Tg=%f\n",Tg); // EC 20200914
     //Calculate the surface energy balance only if you need it
     if (surfacebalance == 1)
     {
@@ -1503,7 +1503,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
 
         // DEBUG HERE
         //  
-        printf("SolvePointEnergyBalance line 1505 Tg=%f\n",Tg); // EC 20200914
+        //printf("SolvePointEnergyBalance line 1505 Tg=%f\n",Tg); // EC 20200914
         //
         if (micro == 1)
         {
@@ -1662,6 +1662,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
     //calculate the norm
     res = norm_2(egy->Fenergy.get(), sur, n);
 
+    printf("SolvePointEnergyBalance line 1665 Tg=%f\n",Tg); // EC 20200914
 
     do
     {
@@ -1728,8 +1729,19 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
         {
             (*egy->udFenergy)(l) = (1.-GTConst::KNe)*(*egy->Kth1)(l);
         }
-
+        //EC 20200914
         //Solve tridiagonal system
+        // how to prnt in egy->dFenergy.get()
+        // for (auto i = path.begin(); i != path.end(); ++i) ref: 
+        // cout << "Disparity at points: " << disparityVector << endl;
+        // ref: https://stackoverflow.com/questions/10750057/how-to-print-out-the-contents-of-a-vector
+        printf("UDEN:\n");
+        for (auto i1 = egy->udFenergy.get().begin(); i1 != egy->udFenergy.get().end(); ++i1)
+           std::cout << *i1 << ' ';
+        printf("DEN:\n");
+        for (auto i2 = egy->udFenergy.get().begin(); i2 != egy->udFenergy.get().end(); ++i2)
+           std::cout << *i2 << ' ';
+        //END EC 20200914
         sux = tridiag2(1, r, c, sur, n, egy->udFenergy.get(), egy->dFenergy.get(), egy->udFenergy.get(),
                        egy->Fenergy.get(), egy->Newton_dir.get());
 
