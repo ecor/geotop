@@ -1740,12 +1740,12 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
         // cout << "Disparity at points: " << disparityVector << endl;
         // ref: https://stackoverflow.com/questions/10750057/how-to-print-out-the-contents-of-a-vector
     
-        printf("UDEN:\n");
-        for (std::vector<char>::const_iterator i1 = egy->udFenergy.get().begin(); i1 != egy->udFenergy.get().end(); ++i1)
-           std::cout << *i1 << ' ';
-        printf("DEN:\n");
-        for (std::vector<char>::const_iterator i2 = egy->udFenergy.get().begin(); i2 != egy->udFenergy.get().end(); ++i2)
-           std::cout << *i2 << ' ';
+        //printf("UDEN:\n");
+        //for (std::vector<char>::const_iterator i1 = egy->udFenergy.get().begin(); i1 != egy->udFenergy.get().end(); ++i1) 
+        //   std::cout << *i1 << ' ';
+        //printf("DEN:\n");
+        //for (std::vector<char>::const_iterator i2 = egy->udFenergy.get().begin(); i2 != egy->udFenergy.get().end(); ++i2)
+        //   std::cout << *i2 << ' ';
         //END EC 20200914
         sux = tridiag2(1, r, c, sur, n, egy->udFenergy.get(), egy->dFenergy.get(), egy->udFenergy.get(),
                        egy->Fenergy.get(), egy->Newton_dir.get());
