@@ -392,7 +392,8 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     printf("PointEnargyBalance r=%d c=%d Ppoint=%f\n",r,c,Ppoint); // EC 20200910
     printf("PointEnargyBalance r=%d c=%d RHpoint=%f\n",r,c,RHpoint); // EC 20200910
     printf("PointEnargyBalance r=%d c=%d Vpoint=%f\n",r,c,Vpoint); // EC 20200910
-
+    if (Tpoint<Tdew) Tpoint=Tdew; // EC 20200915
+    printf("PointEnargyBalance r=%d c=%d Tpoint=%f after correction \n",r,c,Tpoint); // EC 20200910
     //distinguish between rain and snow
     if (A->P->dew==1)
     {
@@ -1493,7 +1494,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
          Qs : specific humidity of canopy air*/
 
         //surface energy balance
-        printf("SolvePointEnergyBalance line 1505 Tg=%f\n",Tg); // EC 20200914
+        printf("SolvePointEnergyBalance line 1496 ex 1505 Tg=%f\n",Tg); // EC 20200914
         EnergyFluxes(t, Tg, r, c, ns+ng, Tg0, Qg0, Tv0, zmu, zmT, z0s, d0s, rz0s, z0v,
                      d0v, rz0v, hveg, v, Ta, Qa, P, LR, psi0, eps, fc, LSAI,
                      decaycoeff0, *Wcrn, Wcrnmax, *Wcsn, Wcsnmax, &dWcrn, &dWcsn, *egy->THETA,
@@ -1507,7 +1508,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
 
         // DEBUG HERE
         //  
-        //printf("SolvePointEnergyBalance line 1505 Tg=%f\n",Tg); // EC 20200914
+        printf("SolvePointEnergyBalance line 1510 Tg=%f\n",Tg); // EC 20200914
         //
         if (micro == 1)
         {
@@ -2494,7 +2495,8 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
                                            theta, std::forward<MatrixView<double>>(soil), T, psi, P, *rv_g, Ta, Qa, *Qg, n);
         turbulent_fluxes(*rh_g, *rv_g/beta, P, Ta, Tg, Qa, *Qg*alpha, dQgdT*alpha,
                          &Hg, &dHg_dT, &Eg, &dEg_dT);
-
+        printf("EnergyFluxes r=%d c=%d Hg=%f\n",r,c,Hg); // EC 20200915
+        printf("EnergyFluxes r=%d c=%d Eg=%f\n",r,c,Eg); // EC 20200915
         *H+=(1.0-fc)*Hg;
         *E+=(1.0-fc)*Eg;
 
@@ -2506,7 +2508,7 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
 
         *Hg0=Hg;
         *Eg0=Eg;
-        printf("Eg  r=%d c=%d \n",r,c); // EC 20200902
+            //        printf("Eg  r=%d c=%d \n",r,c); // EC 20200902
         if (Hg!=Hg)
         {
             f = fopen(FailedRunFile, "w");
