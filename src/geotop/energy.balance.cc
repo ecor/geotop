@@ -385,15 +385,15 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     ea = RHpoint * SatVapPressure(Tpoint, Ppoint);//Vapour Pressure [mbar]
     Qa = SpecHumidity(ea, Ppoint);//Specific Humidity
     Tdew = TfromSatVapPressure(ea, Ppoint);//Dew Temperature
-    printf("PointEnargyBalance r=%d c=%d Qa=%f\n",r,c,Qa); // EC 20200910
-    printf("PointEnargyBalance r=%d c=%d Tdew=%f\n",r,c,Tdew); // EC 20200910
-    printf("PointEnargyBalance r=%d c=%d Tpoint=%f\n",r,c,Tpoint); // EC 20200910
-    printf("PointEnargyBalance r=%d c=%d Precpoint=%f\n",r,c,Precpoint); // EC 20200910
-    printf("PointEnargyBalance r=%d c=%d Ppoint=%f\n",r,c,Ppoint); // EC 20200910
-    printf("PointEnargyBalance r=%d c=%d RHpoint=%f\n",r,c,RHpoint); // EC 20200910
-    printf("PointEnargyBalance r=%d c=%d Vpoint=%f\n",r,c,Vpoint); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Qa=%f\n",r,c,Qa); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Tdew=%f\n",r,c,Tdew); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Tpoint=%f\n",r,c,Tpoint); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Precpoint=%f\n",r,c,Precpoint); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Ppoint=%f\n",r,c,Ppoint); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d RHpoint=%f\n",r,c,RHpoint); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Vpoint=%f\n",r,c,Vpoint); // EC 20200910
     if (Tpoint<Tdew) Tpoint=Tdew; // EC 20200915
-    printf("PointEnargyBalance r=%d c=%d Tpoint=%f after correction \n",r,c,Tpoint); // EC 20200910
+    //printf("PointEnargyBalance r=%d c=%d Tpoint=%f after correction \n",r,c,Tpoint); // EC 20200910
     //distinguish between rain and snow
     if (A->P->dew==1)
     {
@@ -409,8 +409,8 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
         part_snow(Precpoint, &Prain_over, &Psnow_over, Tpoint, A->P->T_rain,
                   A->P->T_snow);
     }
-    printf("PointEnargyBalance Prain_over=%f\n",Prain_over); // EC 20200910
-    printf("PointEnargyBalance Psnow_over=%f\n",Psnow_over); // EC 20200910
+    //printf("PointEnargyBalance Prain_over=%f\n",Prain_over); // EC 20200910
+    //printf("PointEnargyBalance Psnow_over=%f\n",Psnow_over); // EC 20200910
 
     //Adjusting snow precipitation in case of steep slope (contribution by Stephan Gruber)
     if (A->P->snow_curv > 0 && (*A->T->slope)(r,c) > A->P->snow_smin)
@@ -1863,10 +1863,10 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
             }
 
             Tg=(*egy->Temp)(sur);
-            printf("SolvePointEnergyBalance sur=%d\n",sur); // EC 20200905
-            printf("SolvePointEnergyBalance Tg=%f\n",Tg); // EC 20200905
-            printf("SolvePointEnergyBalanceTmin_surface_below_which_surfenergy_balance_recalculated=%f\n",Tmin_surface_below_which_surfenergy_balance_recalculated); // EC 20200905
-            printf("flagTmin=%d\n",flagTmin); // EC 20200905
+            //printf("SolvePointEnergyBalance sur=%d\n",sur); // EC 20200905
+            //printf("SolvePointEnergyBalance Tg=%f\n",Tg); // EC 20200905
+            //printf("SolvePointEnergyBalanceTmin_surface_below_which_surfenergy_balance_recalculated=%f\n",Tmin_surface_below_which_surfenergy_balance_recalculated); // EC 20200905
+            //printf("flagTmin=%d\n",flagTmin); // EC 20200905
             
             if (Tg < Tmin_surface_below_which_surfenergy_balance_recalculated) flagTmin++;
 
@@ -2485,9 +2485,9 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
     //bare soil
     if (fc<1)
     {
-        printf("EnergyFluxes ..."); // EC 20200902
-        printf("EnergyFluxes Ta=%f\n",Ta); // EC 20200902
-        printf("EnergyFluxes Tg=%f\n",Tg); // EC 20200902
+        //printf("EnergyFluxes ..."); // EC 20200902
+        //printf("EnergyFluxes Ta=%f\n",Ta); // EC 20200902
+        //printf("EnergyFluxes Tg=%f\n",Tg); // EC 20200902
         aero_resistance(zmu, zmT, z0s, d0s, rz0s, v, Ta, Tg, Qa, *Qg, P, LR, Lobukhov,
                         &rm, rh_g, rv_g, par->state_turb, par->monin_obukhov, par->maxiter_Businger);
 
@@ -2495,8 +2495,8 @@ void EnergyFluxes(double t, double Tg, long r, long c, long n, // 5 parameters
                                            theta, std::forward<MatrixView<double>>(soil), T, psi, P, *rv_g, Ta, Qa, *Qg, n);
         turbulent_fluxes(*rh_g, *rv_g/beta, P, Ta, Tg, Qa, *Qg*alpha, dQgdT*alpha,
                          &Hg, &dHg_dT, &Eg, &dEg_dT);
-        printf("EnergyFluxes r=%d c=%d Hg=%f\n",r,c,Hg); // EC 20200915
-        printf("EnergyFluxes r=%d c=%d Eg=%f\n",r,c,Eg); // EC 20200915
+        //printf("EnergyFluxes r=%d c=%d Hg=%f\n",r,c,Hg); // EC 20200915
+        //printf("EnergyFluxes r=%d c=%d Eg=%f\n",r,c,Eg); // EC 20200915
         *H+=(1.0-fc)*Hg;
         *E+=(1.0-fc)*Eg;
 
