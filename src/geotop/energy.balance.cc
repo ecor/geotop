@@ -404,7 +404,7 @@ short PointEnergyBalance(long i, long r, long c, double Dt, double JDb,
     }
     else
     {
-        printf("Tair_based");// EC 20200910
+        
         //on the base of the temperature of the air
         part_snow(Precpoint, &Prain_over, &Psnow_over, Tpoint, A->P->T_rain,
                   A->P->T_snow);
@@ -1461,7 +1461,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
         }
 
     }
-    printf("SolvePointEnergyBalance line 1459 Tg=%f\n",Tg); // EC 20200914
+    //printf("SolvePointEnergyBalance line 1459 Tg=%f\n",Tg); // EC 20200914
     //Calculate the surface energy balance only if you need it
     if (surfacebalance == 1)
     {
@@ -1494,7 +1494,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
          Qs : specific humidity of canopy air*/
 
         //surface energy balance
-        printf("SolvePointEnergyBalance line 1496 ex 1505 Tg=%f\n",Tg); // EC 20200914
+        //printf("SolvePointEnergyBalance line 1496 ex 1505 Tg=%f\n",Tg); // EC 20200914
         EnergyFluxes(t, Tg, r, c, ns+ng, Tg0, Qg0, Tv0, zmu, zmT, z0s, d0s, rz0s, z0v,
                      d0v, rz0v, hveg, v, Ta, Qa, P, LR, psi0, eps, fc, LSAI,
                      decaycoeff0, *Wcrn, Wcrnmax, *Wcsn, Wcsnmax, &dWcrn, &dWcsn, *egy->THETA,
@@ -1508,7 +1508,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
 
         // DEBUG HERE
         //  
-        printf("SolvePointEnergyBalance line 1510 Tg=%f\n",Tg); // EC 20200914
+        //printf("SolvePointEnergyBalance line 1510 Tg=%f\n",Tg); // EC 20200914
         //
         if (micro == 1)
         {
@@ -1667,7 +1667,7 @@ short SolvePointEnergyBalance(short surfacemelting, double Tgd,
     //calculate the norm
     res = norm_2(egy->Fenergy.get(), sur, n);
 
-    printf("SolvePointEnergyBalance line 1665 Tg=%f\n",Tg); // EC 20200914
+    //printf("SolvePointEnergyBalance line 1665 Tg=%f\n",Tg); // EC 20200914
 
     do
     {
