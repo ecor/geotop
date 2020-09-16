@@ -137,7 +137,7 @@ void cloudiness(double **meteo, long meteolines, double **horizon,
                     {
                       cloudtrans[n] = (double)number_novalue;
                     }
-                  printf("n = %ld/%ld\n",n+1,meteolines);
+                  //printf("n = %ld/%ld\n",n+1,meteolines);// commented by EC20200916
                 }
             }
 
@@ -145,7 +145,7 @@ void cloudiness(double **meteo, long meteolines, double **horizon,
           for (n=ndiv[k-1]; n<ndiv[k]; n++)
             {
               cloudtrans[n] = tc;
-              printf("n = %ld/%ld\n",n+1,meteolines);
+              //printf("n = %ld/%ld\n",n+1,meteolines);// commented by EC20200916
             }
         }
 
