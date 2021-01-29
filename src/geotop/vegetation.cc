@@ -266,9 +266,9 @@ void canopy_fluxes(long r, long c, double Tv, double Tg, double Ta,
   short MO=par->monin_obukhov;
   FILE *f;
 
-  //CANOPY FRACTION SET AT THE MAX OF SNOW AND LIQUID WATER FRACTION ON CANOPY
-  fwliq=pow(Wcrn/Wcrnmax,2./3.);
-  fwice=pow(Wcsn/Wcsnmax,2./3.);
+  //CANOPY FRACTION SET AT THE MAX OF SNOW AND LIQUID WATER FRACTION ON CANOPY  
+  fwliq=pow(std::max<double>(Wcrn/Wcrnmax,0),2./3.); // fwliq=pow(Wcrn/Wcrnmax,2./3.); //EC 20210129
+  fwice=pow(std::max<double>(Wcsn/Wcsnmax,0),2./3.); // fwice=pow(Wcsn/Wcsnmax,2./3.); //EC 20210129
   fw=std::max<double>(fwliq, fwice);
   if (fw<0) fw=0.0;
   if (fw>1) fw=1.0;
