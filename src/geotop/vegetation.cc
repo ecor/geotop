@@ -412,8 +412,8 @@ void canopy_fluxes(long r, long c, double Tv, double Tg, double Ta,
   {
     f = fopen(FailedRunFile, "w");
     fprintf(f,
-            "Error:: No value in canopy fluxes Loc:%e v:%f rm:%e Ts:%f Tv:%f Ta:%f Tg:%f Hg:%f LWv:%f H:%f LE:%f P:%f Qs:%f Qgsat:%f Qa:%f Qv:%f alpha:%f beta:%f ruc:%f rv:%f rc:%f  %ld %ld\n",
-            Loc,v,*rm,*Ts,Tv,Ta,Tg,Hg,*LWv,*H,*LE,P,*Qs,Qgsat,Qa,*Qv,*alpha,*beta,*ruc,*rv,*rc,r,c);
+            "Error:: No value in canopy fluxes Loc:%e v:%f rm:%e Ts:%f Tv:%f Ta:%f Tg:%f Hg:%f LWv:%f H:%f LE:%f P:%f Qs:%f Qgsat:%f Qa:%f Qv:%f R:%f fw:%f ft:%f alpha:%f beta:%f ruc:%f rv:%f rc:%f  %ld %ld\n",
+            Loc,v,*rm,*Ts,Tv,Ta,Tg,Hg,*LWv,*H,*LE,P,*Qs,Qgsat,Qa,*Qv,R,fw,ft,*alpha,*beta,*ruc,*rv,*rc,r,c);
     fclose(f);
     t_error("Fatal Error! Geotop is closed. See failing report.");
   }
