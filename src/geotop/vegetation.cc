@@ -408,11 +408,11 @@ void canopy_fluxes(long r, long c, double Tv, double Tg, double Ta,
   *dhdT=dLWvdT - dHdT - Lt*(dEdT-dEsubldT) - Lv*dEsubldT;
   *Locc=Loc;
 
-  if (*h!=(*h))
+  if (*h!=(*h) | (*Ts>50) )
   {
-    f = fopen(FailedRunFile, "w");
+    f = fopen(FailedRunFile, "w"); // EC 20210204
     fprintf(f,
-            "Error:: No value in canopy fluxes Loc:%e v:%f rm:%e Ts:%f Tv:%f Ta:%f Tg:%f Hg:%f LWv:%f H:%f LE:%f P:%f Qs:%f Qgsat:%f Qa:%f Qv:%f R:%f fw:%f fwliq:%f fwice:%f ft:%f alpha:%f beta:%f ruc:%f rv:%f rc:%f  Wcrn:%f Wcrnmax:%f Wcsn:%f Wcsnmax:%f %ld %ld\n",
+            "Error:: No value in canopy fluxes or Ts too high (> 50 Celsius degrees) Loc:%e v:%f rm:%e Ts:%f Tv:%f Ta:%f Tg:%f Hg:%f LWv:%f H:%f LE:%f P:%f Qs:%f Qgsat:%f Qa:%f Qv:%f R:%f fw:%f fwliq:%f fwice:%f ft:%f alpha:%f beta:%f ruc:%f rv:%f rc:%f  Wcrn:%f Wcrnmax:%f Wcsn:%f Wcsnmax:%f %ld %ld\n",
             Loc,v,*rm,*Ts,Tv,Ta,Tg,Hg,*LWv,*H,*LE,P,*Qs,Qgsat,Qa,*Qv,R,fw,fwliq,fwice,ft,*alpha,*beta,*ruc,*rv,*rc,Wcrn,Wcrnmax,Wcsn,Wcsnmax,r,c);
     fclose(f);
     t_error("Fatal Error! Geotop is closed. See failing report.");
