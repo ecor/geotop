@@ -23,6 +23,39 @@ STATEVAR_3D::STATEVAR_3D(double nan, long nl, long nr, long nc) :
 
 STATEVAR_3D::~STATEVAR_3D() = default;
 
+// added by EC 20210323
+
+STATEVAR_1D::STATEVAR_1D(double nan, long nl) :
+
+
+     //   type{new short},
+     //  lnum{new long},
+        Dzl{new Vector<double>{nl}},
+        w_liq{new Vector<double>{nl}},
+        w_ice{new Vector<double>{nl}},
+        T{new Vector<double>{nl}}
+{
+  //*type = 2;
+  //*lnum = 0;
+  *Dzl = 0.;
+  *T = nan;
+  *w_ice = 0.;
+  *w_liq = 0.;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 SOIL_STATE::SOIL_STATE(const long n, const long nl) :
 
         P{new Matrix<double>{nl,0,n,1}},

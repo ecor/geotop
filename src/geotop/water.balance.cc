@@ -437,7 +437,7 @@ short Richards3D(double Dt, SOIL_STATE *L, SOIL_STATE *C, ALLDATA *adt, double *
             //printf("..res:%e\n",res);
 
             out2=0;
-
+            // insert and ifdef DEBUG
             geolog << "cnt:" << cont << " res:" << res << " lambda:" << lambda[0]
                    << " Dt:" << Dt << " P:" << *Total_Pnet << std::endl;
 

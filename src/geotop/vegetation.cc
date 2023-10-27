@@ -279,7 +279,7 @@ void canopy_fluxes(long r, long c, double Tv, double Tg, double Ta,
   //FIND SPECIFIC HUMIDITY IN THE VEGETATION LAYER
   SpecHumidity_2(Qv, &dQvdT, 1.0, Tv, P);
 
-  //UNDERCANOPY TURBULENT FLUXES
+  //UNDERCANOPY TURBULENT FLUXES 
 
   //iteration for Ts
   cont2=0;

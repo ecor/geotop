@@ -1612,8 +1612,10 @@ land cover %ld, meteo station %ld\n",
     if (par->blowing_snow==1)
     {
 
+        //commented on 20210323 
         snow->S_for_BS=(STATEVAR_1D *)malloc(sizeof(STATEVAR_1D));
-        allocate_and_initialize_statevar_1D(snow->S_for_BS, (double)number_novalue, par->max_snow_layers);
+        snow->S_for_BS = new STATEVAR_1D{(double)number_novalue, par->max_snow_layers};
+        //allocate_and_initialize_statevar_1D(snow->S_for_BS, (double)number_novalue, par->max_snow_layers); EC 20210323
 
         snow->change_dir_wind.reset(new Vector<long>{std::max<long>(Nr,Nc)});
 

@@ -662,14 +662,24 @@ struct STATEVAR_3D {
 };
 
 
-typedef struct {
+//typedef struct {
+ struct STATEVAR_1D{
+
+    STATEVAR_1D(double nan, long nl); // EC 20210323
+
+    ~STATEVAR_1D();
+
+
     short type;
     long lnum;
     std::unique_ptr<Vector<double>> Dzl; /** snow depth */
     std::unique_ptr<Vector<double>> w_liq;
     std::unique_ptr<Vector<double>> w_ice; /** SWE (snow water equivalent) */
     std::unique_ptr<Vector<double>> T;
-} STATEVAR_1D;
+//} STATEVAR_1D;
+
+};
+
 
 typedef struct {
     STATEVAR_3D *S;

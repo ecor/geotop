@@ -1434,13 +1434,35 @@ double dtheta_snow(double a, double b, double T)
 
 void allocate_and_initialize_statevar_1D(STATEVAR_1D *V, double nan, long nl)
 {
-  V->Dzl.reset(new Vector<double>{nl});
-  V->T.reset(new Vector<double>{nl});
+  
+  printf("\n  allocate_and_initialize_statevar_1D ::nl==%ld \n",nl);
+
+
+   V->Dzl.reset(new Vector<double>{nl});
+   V->T.reset(new Vector<double>(nl));
   *(V->T) = nan;
+  //std::fill(V->T
   V->w_ice.reset(new Vector<double>{nl});
   V->w_liq.reset(new Vector<double>{nl});
+  
 }
-
+/******************************************************************************************************************************************/
+/******************************************************************************************************************************************/
+/******************************************************************************************************************************************/
+/******************************************************************************************************************************************/
+/*
+void allocate_and_initialize_statevar_1D(STATEVAR_1D *V, double nan, long nl){
+	
+	V->Dzl = new_doublevector(nl);
+	initialize_doublevector(V->Dzl, 0.);
+	V->T = new_doublevector(nl);
+	initialize_doublevector(V->T, nan);
+	V->w_ice = new_doublevector(nl);
+	initialize_doublevector(V->w_ice, 0.);
+	V->w_liq = new_doublevector(nl);
+	initialize_doublevector(V->w_liq, 0.);
+}
+/*
 /******************************************************************************************************************************************/
 /******************************************************************************************************************************************/
 /******************************************************************************************************************************************/
