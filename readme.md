@@ -3,7 +3,7 @@
 
 |Build Status| |License (GPL version 3)|
 
-:date:  last revision April 2022
+:date:  last revision December 2024
 
 
 ***********************************************************
@@ -172,6 +172,49 @@ meson configure
 ```
 ninja
 ```
+
+
+### Notes for Mac users
+The following information is related to compiling `geotop v3.0` using `Meson` only.
+On Mac, you might have issues with `libomp`, The error is something like below:
+```
+geotop.p/src_geotop_input.cc.o -c ../src/geotop/input.cc ../src/geotop/input.cc:47:10: fatal error: 'omp.h' file not found
+```
+To resolve this, enable the `WITH_OMP` option in the `meson_options.txt` file. This option is set to `false` by default as seen below:
+
+```
+option('WITH_OMP', type: 'boolean', value: false, description: 'Enable openMP framework')
+```
+
+You can either enable it using the command line:
+
+```
+meson configure -DWITH_OMP=true
+```
+
+Alternatively, you can edit the `meson_options.txt` file directly and set `value: true`.
+
+Another issue was related to the version of GoogleTest (googletest: stable 1.15.2) being incompatible with `C++11`. To address this, you can update your `meson.build` file as follows:
+
+Default header of `meson.build` file:
+
+```
+project('geotop','cpp',
+        default_options : ['cpp_std=c++11',
+  'buildtype=release',
+  'warning_level=3' ],
+        version: '3.0')
+```
+Change to:
+```
+project('geotop','cpp',
+        default_options : ['cpp_std=c++14', # default c++11
+  'buildtype=release',
+  'warning_level=3' ],
+        version: '3.0')
+```
+
+By doing these, you should able to compile `geotop version 3.0.0` on Mac using Meson.
 
 ***********************************************************
 ## Running GEOtop
@@ -374,6 +417,17 @@ https://github.com/TanZiTT/GEOtopSed
 
 **GEOtop_DV** is  a Matlab extension of **GEOtop**  for modelling grassland vegetation dynamics for 1D simulations. Documentation can be found in [Della Chiesa et al. (2014)](https://doi.org/10.1002/eco.1471)
 
+## GEOtop model integration with the meteorological preprocessing from the Meteo-IO libraries.
+
+[**GEOtop V3.1**](https://github.com/geotopmodel/geotop/tree/v2.2.1-old-master) is  a developmment branch  **GEOtop** with the meteorological preprocessing from the **Meteo-IO** libraries integrated.
+This GEOtop version **is no longer supported since 2021**. 
+It is written in c++ and it has the possibility to use the [**MeteoIO** library](https://models.slf.ch/p/meteoio/) to spatialize input meteorological variables. 
+For the latest developments in Meteo-IO, check here: https://meteoio.slf.ch/
+
+This version is successfully used for operational snow mapping by the [**WaterJade company**](https://waterjade.com/en/waterjade-analytics-2/#cta) for operational snow forecasting and in the [**MySnowMaps**](http://www.mysnowmaps.com/en/) app. 
+However, this branch is not fully stable when the model is used with full 3D water and energy budget settings.
+
+
 **************************************************
 ## Operational **GEOtop** model applications 
 
@@ -381,9 +435,9 @@ The GEOtop model has been also used for operational application:
 
 ### Snow depth mapping
 
-The **GEOtop** model (v 2.1) is the scientific basis of the [**MySnowMaps**](https://www.mysnowmaps.com/en/) service, which presents real time snow depth maps and prediction for the Alps, implemented by M. Dall´Amico the [**MobyGis**](http://www.mobygis.com/)  company.
+The **GEOtop** model (v 2.1) is the scientific basis of the [**MySnowMaps**](https://www.mysnowmaps.com/en/) service, which presents real-time snow depth maps and predictions for the Alps, implemented by M. Dall´Amico the [**Waterjade**](https://waterjade.com/)  company, wich offers professional services for snow and water resources forecasting and mapping: https://waterjade.com/en/waterjade-analytics-2/ 
 
-The **GEOtop** model (v 2.1) has been also used by P. Pogliotti for the ARPA Valle d´Aosta (Italy) to monitor in real-time meltwater avaliabilty for hydropower.
+The **GEOtop** model (v 2.1) has been also used by P. Pogliotti for the ARPA Valle d´Aosta (Italy) to monitor in real-time meltwater availability for hydropower.
 
 
 ### Water budget mapping
@@ -416,13 +470,29 @@ This last work was partly supported by:
 **************************************
 ## REFERENCES
 
-Here is the full list of peer-reviewed publications using the GEOtop model (updated October 2021):
+Here is the full list of peer-reviewed publications that we know that are using the GEOtop model. Please let as know if some are missed! (updated March 2025):
 
+* Dall’Amico, M., Tasin, S., Di Paolo, F., Brian M., Leoni, P., Tornatore, F., Formetta, G., Wani, J.M., Rigon, R., and Gaia Roati. G.:  30-years (1991-2021) Snow Water Equivalent Dataset in the Po River District, Italy. Sci Data 12, 374 (2025). https://doi.org/10.1038/s41597-025-04633-5
+
+* Li, Y., Rangarajan, S., Rahardjo, H. et al. Database of soil properties incorporating organic content from roots and soil organisms for regional slope stabilisation. Sci Rep 15, 1066 (2025). https://doi.org/10.1038/s41598-025-85250-5
+
+* Cheng, Y.; Li, Y. Application of Capillary Barrier Systems for Slope Stabilization Under Extreme Rainfall: A Case Study of National Highway 10, India. Infrastructures (2024), 9, 201. https://doi.org/10.3390/infrastructures9110201
+ 
+* Hou, R. et al. Big Disaster from Small Watershed: Insights into the Failure and Disaster-Causing Mechanism of a Debris Flow on 25 September 2021 in Tianquan, China. Int. J. Disaster Risk Sci. 15, 622–639 (2024) https://link.springer.com/article/10.1007/s10346-021-01681-x
+
+* Rangarajan, S., Rahardjo, H., Satyanaga, A. & Li, Y. Influence of 3D subsurface flow on slope stability for unsaturated soils. Eng. Geol. 339, 107665 (2024). https://doi.org/10.1016/j.enggeo.2024.10766
+
+* Busti, R., Capparelli, G. & Formetta, G. Exploring hydrological dynamics of layered pyroclastic soils by combining laboratory and field experiments with a numerical model. Hydrol. Process. 38, (2024). https://onlinelibrary.wiley.com/doi/10.1002/hyp.15257
+
+* Bright Ross, J. G., Peters, W., Ossi, F., Moorcroft, P. R., Cordano, E., Eccel, E., et al. (2021). Climate change and anthropogenic food manipulation interact in shifting the distribution of a large herbivore at its altitudinal range limit. Scientific Reports. https://doi.org/10.1038/s41598-021-86720-2
+  
+* Tufano, R., Formetta, G., Calcaterra, D. & Vita, P. D. Hydrological control of soil thickness spatial variability on the initiation of rainfall-induced shallow landslides using a three-dimensional model. Landslides 18, 3367–3380 (2021). https://link.springer.com/article/10.1007/s10346-021-01681-x
+  
 * Wani, J. M., Thayyen, R. J., Ojha, C. S. P., and Gruber, S.: The surface energy balance in a cold and arid permafrost environment, Ladakh,  Himalayas, India, The Cryosphere, 15, 2273--2293, https://doi.org/10.5194/tc-15-2273-2021, 2021.
 
 * Bright Ross, J.G., Peters, W., Ossi, F., Moorcroft, P.L.,  Cordano, E.,  Eccel, E.,  Bianchini, F.,  Ramanzin, M., and  Cagnacci, F. . Climate change and anthropogenic food manipulation interact in shifting the distribution of a large herbivore at its altitudinal range limit. Sci Rep 11, 7600 (2021). https://doi.org/10.1038/s41598-021-86720-2
 
-*  Terzago, S., Andreoli, V., Arduini, G., Balsamo, G., Campo, L., Cassardo, C., Cremonese, E., Dolia, D., Gabellani, S., Hardenberg, J. von, Cella, U.M. di, Palazzi, E., Piazzi, G., Pogliotti, P., Provenzale, A., 2020. Sensitivity of snow models to the accuracy of meteorological forcings in mountain environments. Hydrology and Earth System Sciences 24, 4061–4090. https://doi.org/10.5194/hess-24-4061-2020
+*  Terzago, S., Andreoli, V., Arduini, G., Balsamo, G., Campo, L., Cassardo, C., Cremonese, E., Dolia, D., Gabellani, S., Hardenberg, J. von, Cella, U.M. di, Palazzi, E., Piazzi, G., Pogliotti, P., Provenzale, A., 2020. Sensitivity of snow models to the accuracy of meteorological forcings in mountain environments, 2020. Hydrology and Earth System Sciences 24, 4061–4090. https://doi.org/10.5194/hess-24-4061-2020
 
 * Wani, J.M., Thayyen, R.J., Gruber, S., Ojha, C.S.P., Stumm, D., 2020. Single-year thermal regime and inferred permafrost occurrence in the upper Ganglass catchment of the cold-arid Himalaya, Ladakh, India. Sci. Total Environ. 703, 134631. https://doi.org/10.1016/j.scitotenv.2019.134631
 
